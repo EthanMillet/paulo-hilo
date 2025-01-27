@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import FlightSchoolConnect from '../components/FlightSchoolConnect.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <FlightSchoolConnect />
   </main>
 </template>
