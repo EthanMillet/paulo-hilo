@@ -1,9 +1,9 @@
 <script setup>
-import FlightSchoolConnect from '../components/FlightSchoolConnect.vue'
+import Form from '../components/Form.vue'
 </script>
 
 <template>
   <main>
-    <FlightSchoolConnect />
+    <Form />
   </main>
 </template>

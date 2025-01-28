@@ -15,6 +15,72 @@ a,
   padding: 3px;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5px;
+  position: relative;
+}
+.form-group label {
+  font-size: small;
+}
+.form-group select, .form-group input {
+  padding: 0.6rem;
+  background-color: rgba(64, 64, 64, 0.05);
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+}
+.search-container {
+  position: relative;
+}
+.default-icon {
+  position: absolute;
+  margin: 0.5rem 0.5rem 0.5rem 0.8rem;
+  height: 18px;
+}
+.search-container input {
+  padding-left: 2.5rem;
+}
+
+
+.flex-row {
+  display: grid;
+  gap: 20px;
+}
+.flex-row.sm-gap {
+  gap: 5px;
+}
+.primary-btn, button {
+  background-color: var(--vt-c-text-primary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.7rem 1.5rem;
+  font-size: small;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+}
+.primary-btn:hover, button:hover {
+  opacity: .8;
+}
+.text-center {
+  text-align: center;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
