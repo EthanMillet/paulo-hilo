@@ -5,17 +5,20 @@
         <span
           v-for="(day, index) in daysInCalendar"
           :key="index"
-          :class="[ 
+          :class="[
             'day',
             { selected: day.currentMonth && day.day === selectedDate },
             { weekday: isWeekday(day.index) },
-            { 'other-month': !day.currentMonth }
+            { 'other-month': !day.currentMonth },
           ]"
           @click="day.currentMonth && selectDate(day.day)"
         >
           {{ day.day }}
           <div
-            v-if="day.currentMonth && (day.day === selectedDate || (!selectedDate && isCurrentDate(day)))"
+            v-if="
+              day.currentMonth &&
+              (day.day === selectedDate || (!selectedDate && isCurrentDate(day)))
+            "
             class="red-dot"
           ></div>
         </span>
@@ -55,12 +58,20 @@ export default {
   },
   methods: {
     calculateDaysInCalendar() {
-      const currentMonthDays = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
+      const currentMonthDays = new Date(
+        this.selectedYear,
+        this.selectedMonth + 1,
+        0
+      ).getDate();
       const firstDayOfMonth = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
-      const previousMonthDays = new Date(this.selectedYear, this.selectedMonth, 0).getDate();
+      const previousMonthDays = new Date(
+        this.selectedYear,
+        this.selectedMonth,
+        0
+      ).getDate();
 
       const days = [];
-      for(let i = firstDayOfMonth - 1; i >= 0; i--) {
+      for (let i = firstDayOfMonth - 1; i >= 0; i--) {
         days.push({
           day: previousMonthDays - i,
           currentMonth: false,
@@ -68,7 +79,7 @@ export default {
         });
       }
 
-      for(let i = 1; i <= currentMonthDays; i++) {
+      for (let i = 1; i <= currentMonthDays; i++) {
         days.push({
           day: i,
           currentMonth: true,
@@ -77,7 +88,7 @@ export default {
       }
 
       const remainingSlots = 42 - days.length;
-      for(let i = 1; i <= remainingSlots; i++) {
+      for (let i = 1; i <= remainingSlots; i++) {
         days.push({
           day: i,
           currentMonth: false,
@@ -96,13 +107,15 @@ export default {
       this.emitDateTime();
     },
     emitDateTime() {
-      if(this.selectedDate && this.selectedTime) {
-        const dateTimeString = `${this.selectedYear}-${String(this.selectedMonth + 1).padStart(2, "0")}-${String(
-          this.selectedDate
-        ).padStart(2, "0")} ${this.convert(this.selectedTime)}`;
+      if (this.selectedDate && this.selectedTime) {
+        const dateTimeString = `${this.selectedYear}-${String(
+          this.selectedMonth + 1
+        ).padStart(2, "0")}-${String(this.selectedDate).padStart(2, "0")} ${this.convert(
+          this.selectedTime
+        )}`;
 
         const dateTime = new Date(dateTimeString);
-        console.log('dateTime :>> ', dateTime)
+        console.log("dateTime :>> ", dateTime);
         this.$emit("selected", dateTime);
       }
     },
