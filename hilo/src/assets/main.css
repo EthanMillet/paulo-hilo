@@ -61,12 +61,17 @@ a,
   background-color: var(--vt-c-text-primary);
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 0.7rem 1.5rem;
   font-size: small;
   font-weight: bold;
   cursor: pointer;
   transition: .2s ease-in-out;
+}
+.vectorIcon {
+  width: 0.6rem;
+  position: absolute;
+  right: 15px;
 }
 .primary-btn:hover, button:hover {
   opacity: .8;

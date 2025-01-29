@@ -10,8 +10,9 @@
             { selected: day.currentMonth && day.day === selectedDate },
             { weekday: isWeekday(day.index) },
             { 'other-month': !day.currentMonth },
+            { 'past-date': day.isPastDate },
           ]"
-          @click="day.currentMonth && selectDate(day.day)"
+          @click="!day.isPastDate && day.currentMonth && selectDate(day.day)"
         >
           {{ day.day }}
           <div
@@ -58,20 +59,15 @@ export default {
   },
   methods: {
     calculateDaysInCalendar() {
-      const currentMonthDays = new Date(
-        this.selectedYear,
-        this.selectedMonth + 1,
-        0
-      ).getDate();
+      const currentMonthDays = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
       const firstDayOfMonth = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
-      const previousMonthDays = new Date(
-        this.selectedYear,
-        this.selectedMonth,
-        0
-      ).getDate();
+      const previousMonthDays = new Date(this.selectedYear, this.selectedMonth, 0).getDate();
+
+      const today = this.today;
+      const isCurrentMonth = this.selectedMonth === today.getMonth() && this.selectedYear === today.getFullYear();
 
       const days = [];
-      for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+      for(let i = firstDayOfMonth - 1; i >= 0; i--) {
         days.push({
           day: previousMonthDays - i,
           currentMonth: false,
@@ -79,16 +75,20 @@ export default {
         });
       }
 
-      for (let i = 1; i <= currentMonthDays; i++) {
+      for(let i = 1; i <= currentMonthDays; i++) {
+        const isPastDate =
+          isCurrentMonth && i < today.getDate();
+
         days.push({
           day: i,
           currentMonth: true,
           index: days.length,
+          isPastDate,
         });
       }
 
       const remainingSlots = 42 - days.length;
-      for (let i = 1; i <= remainingSlots; i++) {
+      for(let i = 1; i <= remainingSlots; i++) {
         days.push({
           day: i,
           currentMonth: false,
@@ -98,6 +98,7 @@ export default {
 
       this.daysInCalendar = days;
     },
+
     selectDate(day) {
       this.selectedDate = day;
       this.emitDateTime();
@@ -210,6 +211,11 @@ export default {
 .day.other-month {
   background-color: transparent;
   color: #cfcfcf;
+  cursor: not-allowed;
+}
+.day.past-date {
+  background-color: #d0e5ff;
+  color: #fff;
   cursor: not-allowed;
 }
 .red-dot {

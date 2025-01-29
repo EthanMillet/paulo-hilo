@@ -32,7 +32,6 @@ export default {
     grid-template-columns: repeat(6, 1fr);
 }
 .step {
-    width: 60px;
     height: 100%;
     border-radius: 5px;
     background: #F5F5F5;

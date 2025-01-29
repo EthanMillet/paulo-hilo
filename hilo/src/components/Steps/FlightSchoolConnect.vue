@@ -8,6 +8,7 @@
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>
+      <img class="vectorIcon" :src="CaretDown" />
     </div>
 
     <div class="form-group">
@@ -141,7 +142,7 @@
 </template>
 <script>
 import IconSearch from "../icons/IconSearch.vue";
-
+import CaretDown from "@/assets/images/CaretDown.png";
 export default {
   components: { IconSearch },
   props: {
@@ -162,6 +163,7 @@ export default {
   data() {
     return {
       isFocused: false,
+      CaretDown
     };
   },
   computed: {
@@ -182,6 +184,20 @@ export default {
 };
 </script>
 <style>
+.form-group {
+  position: relative;
+}
+.form-container select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.vectorIcon {
+  width: 0.6rem;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
 .search-action {
   display: flex;
   justify-content: space-between;
@@ -200,34 +216,4 @@ export default {
   font-size: small;
 }
 
-.search-results {
-  position: absolute;
-  top: 65px;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  width: 100%;
-  z-index: 1;
-}
-.search-results ul {
-  padding: 0;
-  overflow-y: auto;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  font-size: 13px;
-}
-.search-results ul li {
-  list-style: none;
-  padding: 0.5rem 1rem;
-  transition: 0.2s ease-in-out;
-}
-.search-options {
-  cursor: pointer;
-}
-.search-options:hover {
-  background: #ececec;
-}
 </style>
