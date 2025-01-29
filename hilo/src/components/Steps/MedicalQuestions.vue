@@ -35,6 +35,7 @@
             <option value="M">Male</option>
             <option value="F">Female</option>
           </select>
+          <img class="vectorIcon" :src="CaretDown" />
         </div>
       </div>
     </div>
@@ -45,6 +46,7 @@
         <select v-model="form.medicalType" id="medicalType">
           <option :value="false" disabled selected>Choose one...</option>
         </select>
+        <img class="vectorIcon" :src="CaretDown" />
       </div>
     </div>
 
@@ -77,6 +79,7 @@
         <select v-model="form.localAME" id="localAME">
           <option :value="false" disabled selected>Choose one...</option>
         </select>
+        <img class="vectorIcon" :src="CaretDown" />
     </div>
 
     <div class="form-group">
@@ -93,7 +96,7 @@
 </template>
 <script>
 import DateTimePicker from "../DateTimePicker.vue";
-
+import CaretDown from "@/assets/images/CaretDown.png";
 export default {
   components: { DateTimePicker },
   props: {
@@ -108,13 +111,13 @@ export default {
   },
   data() {
     return {
-      medicalCertificates: null,
+      CaretDown
     };
   },
   methods: {
     handleFileUpload(event) {
       const file = event.target.files[0];
-      if(file) this.medicalCertificates = file;
+      if(file) this.form.medicalCertificate = file;
     },
     selectedDate(date) {
         this.form.selectedSchedule = date;

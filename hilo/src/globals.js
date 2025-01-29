@@ -12,6 +12,14 @@ export default {
         return { gridTemplateColumns: `repeat(${cols}, 1fr)` }
     },
 
+    /**
+     * @description Convert PascalCase string into Pascal Case with spaces
+     * @param {string} str 
+     * @returns {string}
+     */
+    formatTitle(str) {
+        return str.replace(/([A-Z])/g, ' $1').trim();
+    }
 
   };
   
